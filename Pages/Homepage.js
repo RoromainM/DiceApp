@@ -1,17 +1,10 @@
-// les imports
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Box } from "@react-native-material/core";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-import GamesInfoPage from "./Pages/GameInfo"; 
-import GamesPage from "./Pages/Games"; 
-import MenuPage from "./Pages/Menu"; 
+import { useNavigation } from "@react-navigation/native";
 
 
-
-function HomePageScreen({ navigation }) {
+export default function App() {
   return (
     <View>
       {/* barTop */}
@@ -71,9 +64,7 @@ function HomePageScreen({ navigation }) {
 
 
       <View>
-        <TouchableOpacity
-        onPress={() => navigation.navigate("Games")}
-        >
+        <TouchableOpacity>
         <Box
             w={360}
             h={130}
@@ -117,22 +108,16 @@ function HomePageScreen({ navigation }) {
             </Text>
 
             <View style={styles.WhatsOnBtn}>
-              <Text style={styles.WhatsOnTitle}>
-                    RANKING
-              </Text>
               <TouchableOpacity>
                   <Image
                     style={styles.WhatsOnImg}
-                    source={require("./assets/ranking.png")}
+                    source={require("./assets/testDiscover.png")}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text style={styles.WhatsOnTitle}>
-                    NEWS
-                  </Text>
                   <Image
                     style={styles.WhatsOnImg}
-                    source={require("./assets/news.png")}
+                    source={require("./assets/testDiscover.png")}
                   />
                 </TouchableOpacity>
             </View>
@@ -179,7 +164,7 @@ function HomePageScreen({ navigation }) {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => navigation.navigate("Menu")}
+                onPress={() => navigation.navigate("Menu.js")}
               >
                 <Image
                   style={styles.boticon}
@@ -193,6 +178,9 @@ function HomePageScreen({ navigation }) {
     </View>
   );
 }
+
+
+
 
 
 const styles = StyleSheet.create({
@@ -248,7 +236,6 @@ const styles = StyleSheet.create({
   },
   discoverDescription: {
     top: 20,
-    width: 200,
   },
   WhatsOn: {
     top: 290,
@@ -262,67 +249,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   WhatsOnImg: {
-    width: 160,
+    width: 100,
     height: 100,
-  },
-  WhatsOnTitle: {
-    color: 'black',
-    top: 200,
-    fontSize: 50,
-  },
+  }
 });
 
-
-
-
-
-
-
-
-
-
-function GamesScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <GamesPage />
-    </View>
-  );
-}
-
-function GamesInfoScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <GamesInfoPage />
-    </View>
-  );
-}
-
-function MenuScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <MenuPage />
-    </View>
-  );
-}
-
-
-const Stack = createNativeStackNavigator();
-
-function App() {
-  return (
-    // Chemin de navigation
-    <NavigationContainer>
-      <Stack.Navigator 
-        initialRouteName="Home"
-        hideNavigationBar={{headerShown: false}}
-      >
-        <Stack.Screen name="Home" component={HomePageScreen} />
-        <Stack.Screen name="Games" component={GamesScreen} />
-        <Stack.Screen name="GamesInfos" component={GamesInfoScreen} />
-        <Stack.Screen name="Menu" component={MenuScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-export default App;
